@@ -100,7 +100,8 @@ function Changepass() {
       }
       const jsonData = {
           password:password,
-          newpassword:newpassword
+          newpassword:newpassword,
+          status: 'Changepassword'
       }
       const token = localStorage.getItem('token')
       fetch("http://localhost:5000/changepass", {
@@ -118,6 +119,16 @@ function Changepass() {
               html: <i>{data.message}</i>,
               icon: 'success'
             }).then((value) => {
+              const token = localStorage.getItem('token')
+              fetch("http://localhost:5000/logfile", {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'AUthorization': 'Bearer ' + token
+                },
+                body: JSON.stringify(jsonData),//{ email:เมลที่กรอกไป,iat: เวลาสร้าง }
+              })
+                .then(response => response.json())
               localStorage.removeItem('token');
               navigate('/')
             })

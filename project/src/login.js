@@ -56,7 +56,8 @@ function Login() {
       if (isLocked) return;
       const jsonData = {
           email: email,
-          password: password
+          password: password,
+          status: 'Sign in' 
       }
       fetch("http://localhost:5000/login", {
         method: 'POST',
@@ -74,6 +75,16 @@ function Login() {
               html: <i>{data.message}</i>,
               icon: 'success'
             }).then((value) => {
+              const token = localStorage.getItem('token')
+              fetch("http://localhost:5000/logfile", {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'AUthorization':'Bearer '+token
+                },
+                body: JSON.stringify(jsonData),//{ email:เมลที่กรอกไป,iat: เวลาสร้าง }
+              })
+              .then(response => response.json())
               navigate('/profile')
             })
           } else {
@@ -86,6 +97,8 @@ function Login() {
         })
         .catch(error => console.log('error', error));
       console.log(inputs);
+     
+      
     }
 
   const navigateToOtp= ()=>{
@@ -118,6 +131,7 @@ function Login() {
           })
         }
       })
+      
   }
   return (
     <div>

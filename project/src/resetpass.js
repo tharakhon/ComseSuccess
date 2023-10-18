@@ -91,7 +91,9 @@ function Resetpass() {
         return;
       }
       const jsonData = {
-          newpassword:newpassword
+          newpassword:newpassword,
+          status: 'Resetpassword'
+          
       }
       const token = localStorage.getItem('token')
       fetch("http://localhost:5000/resetpass", {
@@ -109,6 +111,15 @@ function Resetpass() {
               html: <i>{data.message}</i>,
               icon: 'success'
             }).then((value) => {
+              const token = localStorage.getItem('token')
+              fetch("http://localhost:5000/logfile2", {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'AUthorization': 'Bearer ' + token
+                },
+                body: JSON.stringify(jsonData),//{ email:เมลที่กรอกไป,iat: เวลาสร้าง }
+              }).then(response => response.json())
               localStorage.removeItem('token');
               sessionStorage.removeItem('recovery');
               navigate('/')

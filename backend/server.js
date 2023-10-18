@@ -107,6 +107,35 @@ app.post('/authen', jsonParser,function (req, res, next) {
   }catch(err){
     res.json({status :'error',message:err.message})
   }
+})
+  app.post('/checkpassdate', jsonParser,function (req, res, next) {
+    try{
+      const token = req.headers.authorization.split(' ')[1]
+      var decoded = jwt.verify(token, secret);console.log(decoded)
+      connection.execute(
+        'SELECT * FROM users WHERE email=?',
+        [decoded.email],
+        function (err, users, fields) {
+          console.log('searching');
+          if (err) {
+            res.json({ status: 'error', message: err });
+            return
+          }
+          else{
+            const date1=new Date(users[0].datepass);
+            const date2=new Date();
+            const timeDiff = Math.abs(date2 - date1);
+            const daysDiff = timeDiff / (24 * 60 * 60 * 1000);
+            if (daysDiff >= 90) {
+              res.json({status :'outdated',message:'your latest password is 90 days ago please change your password',decoded})
+            } else {
+              res.json({status :'ok',decoded})
+            }
+          }
+        });
+    }catch(err){
+      res.json({status :'error',message:err.message})
+    }
   
 })
 app.post('/authenreset', jsonParser,function (req, res, next) {
@@ -165,6 +194,9 @@ app.post('/changepass', jsonParser,function (req, res, next) {
                         return
                       }
                       else{
+                        connection.execute(
+                          'UPDATE users SET datepass = ? WHERE email = ?',
+                          [new Date(),decoded.email])
                         res.json({status : 'ok',message:'Password Changed'})
                       }
                     });
@@ -198,6 +230,9 @@ app.post('/resetpass', jsonParser,function (req, res, next) {
           return
           }
         else{
+          connection.execute(
+            'UPDATE users SET datepass = ? WHERE email = ?',
+            [new Date(),decoded.recovery])
           res.json({status : 'ok',message:'Password Changed'})
         }
         });
@@ -279,8 +314,46 @@ app.post('/confirmotp', jsonParser,function (req, res, next) {
   }else{
     res.json({status : 'error',message:'The code you have entered is not correct or may expired'})
   }
-
-  
+})
+app.post('/logfile', jsonParser,function (req, res, next) {
+  const token = req.headers.authorization.split(' ')[1]
+  var decoded = jwt.verify(token, secret);console.log(decoded)
+  connection.execute(
+    'INSERT INTO logfile (email, status ) VALUES (?,?)',
+    [decoded.email,req.body.status],
+    function (err, results, fields) {
+      if (err) {
+        res.json({ status: 'error', message: err })
+        return
+      }
+      res.json({ status: 'ok', message: "Success" })
+    });
+})
+app.post('/logfile1', jsonParser,function (req, res, next) {
+  connection.execute(
+    'INSERT INTO logfile (email, status ) VALUES (?,?)',
+    [req.body.email,req.body.status],
+    function (err, results, fields) {
+      if (err) {
+        res.json({ status: 'error', message: err })
+        return
+      }
+      res.json({ status: 'ok', message: "Success" })
+    });
+})
+app.post('/logfile2', jsonParser,function (req, res, next) {
+  const token = req.headers.authorization.split(' ')[1]
+  var decoded = jwt.verify(token, secret);console.log(decoded.recovery)
+  connection.execute(
+    'INSERT INTO logfile (email, status ) VALUES (?,?)',
+    [decoded.recovery,req.body.status],
+    function (err, results, fields) {
+      if (err) {
+        res.json({ status: 'error', message: err })
+        return
+      }
+      res.json({ status: 'ok', message: "Success" })
+    });
 })
 app.listen(5000, function () {
   console.log('CORS-enabled web server listening on port 5000')

@@ -54,7 +54,8 @@ export default function Login() {
             .then(data => {
               console.log(localStorage.getItem('token'))
               if (data.status === 'ok') {
-              } else {
+              }
+              else {
                 MySwal.fire({
                   html: <i>{data.message}</i>,
                   icon: 'error'
@@ -66,10 +67,56 @@ export default function Login() {
               }
             })
     },[])
+    useEffect(() => {
+      const token = localStorage.getItem('token')
+      fetch("http://localhost:5000/checkpassdate", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'AUthorization':'Bearer '+token
+          }
+        })
+          .then(response =>response.json())
+          .then(data => {
+            console.log(localStorage.getItem('token'))
+            if (data.status === 'ok') {
+            }
+            else if(data.status === 'outdated'){
+              MySwal.fire({
+                html: <i>{data.message}</i>,
+                icon: 'error'
+              }).then((value) => {
+                  navigate('/changepass')
+                })
+            } else {
+              MySwal.fire({
+                html: <i>{data.message}</i>,
+                icon: 'error'
+              }).then((value) => {
+                  localStorage.removeItem('token');
+                  navigate('/')
+                })
+    
+            }
+          })
+  },[])
      const handleLogout = (event) =>{
-        event.preventDefault();
-        localStorage.removeItem('token');
-        navigate('/')
+       event.preventDefault();
+       const token = localStorage.getItem('token')
+       const jsonData = {
+         status: 'Logout'
+       };
+       fetch("http://localhost:5000/logfile", {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+           'AUthorization':'Bearer '+token
+         },
+         body: JSON.stringify(jsonData),//{ email:เมลที่กรอกไป,iat: เวลาสร้าง }
+       })
+         .then(response => response.json())
+       localStorage.removeItem('token');
+       navigate('/')
      }
      const handleChangePass = (event) =>{
       event.preventDefault();

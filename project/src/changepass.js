@@ -68,14 +68,13 @@ function Changepass() {
         });
         return;
       }
-      if (newpassword.length <= 7) {
+      if (newpassword.length < 8 || newpassword.length > 20) {
         MySwal.fire({
-          html: <i>Password must be at least 8 characters long.</i>,
+          html: <i>Password must be between 8 and 20 characters long.</i>,
           icon: 'error',
         });
         return;
       }
-    
       // ตรวจสอบว่ารหัสผ่านมีตัวอักษรพิมพ์ใหญ่และตัวอักษรพิมพ์เล็ก
       if (!/[a-z]/.test(newpassword) || !/[A-Z]/.test(newpassword)) {
         MySwal.fire({

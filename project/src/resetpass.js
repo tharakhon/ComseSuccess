@@ -61,7 +61,7 @@ function Resetpass() {
         });
         return;
       }
-      if (newpassword.length <= 7) {
+      if (newpassword.length < 8 || newpassword.length > 20) {
         MySwal.fire({
           html: <i>Password must be at least 8 characters long.</i>,
           icon: 'error',

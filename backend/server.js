@@ -39,7 +39,7 @@ app.post('/register', jsonParser,function (req, res, next) {
         }
         else{
           const password = req.body.password;
-          if (password.length <= 7 || !/[a-z]/.test(password) || !/[A-Z]/.test(password)) //ต้องมากกว่า7 มีพิมเล็ก พิมใหญ่
+          if (password.length < 8 || password.length > 20 || !/[a-z]/.test(password) || !/[A-Z]/.test(password)) //ต้องมากกว่า7 มีพิมเล็ก พิมใหญ่
           {
             res.json({ status: 'error', message: 'Password must be at least 8 characters long and contain both uppercase and lowercase letters.' });
             return;

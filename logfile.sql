@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3307
--- Generation Time: Oct 18, 2023 at 05:59 PM
+-- Generation Time: Oct 19, 2023 at 11:23 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -109,7 +109,8 @@ INSERT INTO `logfile` (`id`, `email`, `status`, `time`) VALUES
 (68, 'kamolchanok.sin@ku.th', 'Sign in', '2023-10-18 15:36:12'),
 (69, 'kamolchanok.sin@ku.th', 'Changepassword', '2023-10-18 15:39:51'),
 (70, 'tharakhon.r@ku.th', 'Sign in', '2023-10-18 15:56:23'),
-(71, 'tharakhon.r@ku.th', 'Logout', '2023-10-18 15:56:30');
+(71, 'tharakhon.r@ku.th', 'Logout', '2023-10-18 15:56:30'),
+(72, 'tharakhon555@gmail.com', 'Register', '2023-10-19 09:19:49');
 
 --
 -- Indexes for dumped tables
@@ -129,7 +130,7 @@ ALTER TABLE `logfile`
 -- AUTO_INCREMENT for table `logfile`
 --
 ALTER TABLE `logfile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

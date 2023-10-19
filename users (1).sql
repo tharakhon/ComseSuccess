@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3307
--- Generation Time: Oct 18, 2023 at 05:59 PM
+-- Generation Time: Oct 19, 2023 at 11:23 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -29,9 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `fname` varchar(255) NOT NULL,
-  `lname` varchar(255) NOT NULL,
+  `email` varchar(40) NOT NULL,
+  `fname` varchar(30) NOT NULL,
+  `lname` varchar(30) NOT NULL,
   `password` text NOT NULL,
   `datepass` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -46,7 +46,8 @@ INSERT INTO `users` (`id`, `email`, `fname`, `lname`, `password`, `datepass`) VA
 (3, 'haritnuttakron@gmail.com', 'harit', 'nuttakron', '$2b$10$eiCs086LngFiDel8mAGha.m7TP8nmsE5GDHCsmm84ixumatMzm.iu', '2023-10-17'),
 (9, 'noppanund@gmail.com', 'noppanun', 'tohmee', '$2b$10$r7Jl9U1kbp5ADjYgalkOqe23OxuXK8ZmUGmP.CEC.wTUNjoVfcwKS', '2023-10-18'),
 (10, 'kamolchanok.sin@ku.th', 'kamolchanok', 'singsomboon', '$2b$10$M1wurKlnV68ZFARZkTEigupiU3N9BcyRTTbvRpwZJt4UFuEPFEQoK', '2023-10-18'),
-(11, 'kamol.sin@ku.th', 'kamaol', 'pppppp', '$2b$10$HDsbZWU.QzDaeVRaKcFuNOImUknyP415Y37VPvtj1yPw/RAN0cm2e', '2023-10-18');
+(11, 'kamol.sin@ku.th', 'kamaol', 'pppppp', '$2b$10$HDsbZWU.QzDaeVRaKcFuNOImUknyP415Y37VPvtj1yPw/RAN0cm2e', '2023-10-18'),
+(12, 'tharakhon555@gmail.com', 'Tharakhon', 'Radachai', '$2b$10$AQPi16cLt7qTmRo/rnyAaOG00dTKLVgtSpyfYLN.n6Ef18EoDRdAm', '2023-10-19');
 
 --
 -- Indexes for dumped tables
@@ -67,7 +68,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

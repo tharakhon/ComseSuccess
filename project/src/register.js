@@ -46,6 +46,20 @@ function Register() {
       });
       return;
     }
+    if (fname.length > 30 || lname.length > 30) {
+      MySwal.fire({
+        html: <i>First Name and Last Name must not exceed 30 characters.</i>,
+        icon: 'error',
+      });
+      return;
+    }
+    if (email.length > 40) {
+      MySwal.fire({
+        html: <i>Email must not exceed 40 characters.</i>,
+        icon: 'error',
+      });
+      return;
+    }
   
     // ตรวจสอบว่ารหัสผ่านมีตัวอักษรพิมพ์ใหญ่และตัวอักษรพิมพ์เล็ก
     if (!/[a-z]/.test(password) || !/[A-Z]/.test(password)) {
@@ -55,6 +69,7 @@ function Register() {
       });
       return;
     }
+    
     const jsonData = {
       email: email,
       fname: fname,

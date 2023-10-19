@@ -63,19 +63,19 @@ function Resetpass() {
       }
       if (newpassword.length < 8 || newpassword.length > 20) {
         MySwal.fire({
-          html: <i>Password must be at least 8 characters long.</i>,
+          html: <i>Password must be between 8 and 20 characters long.</i>,
           icon: 'error',
         });
         return;
       }
           // ตรวจสอบว่ารหัสผ่านมีตัวอักษรพิมพ์ใหญ่และตัวอักษรพิมพ์เล็ก
-      if (!/[a-z]/.test(newpassword) || !/[A-Z]/.test(newpassword)) {
-        MySwal.fire({
-          html: <i>Password must contain both uppercase and lowercase letters.</i>,
-          icon: 'error',
-        });
-        return;
-      }
+          if (!/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/[!@#$%^&*]/.test(password) || !/[0-9]/.test(password)) {
+            MySwal.fire({
+              html: <i>Password must contain lowercase letters, uppercase letters, and at least one special character (!@#$%^&*).</i>,
+              icon: 'error',
+            });
+            return;
+          }
       if ( !confirmpassword) {
         MySwal.fire({
           html: <i>Please confirm your Password</i>,

@@ -62,13 +62,14 @@ function Register() {
     }
   
     // ตรวจสอบว่ารหัสผ่านมีตัวอักษรพิมพ์ใหญ่และตัวอักษรพิมพ์เล็ก
-    if (!/[a-z]/.test(password) || !/[A-Z]/.test(password)) {
+    if (!/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/[!@#$%^&*]/.test(password) || !/[0-9]/.test(password)) {
       MySwal.fire({
-        html: <i>Password must contain both uppercase and lowercase letters.</i>,
+        html: <i>Password must contain lowercase letters, uppercase letters, and at least one special character (!@#$%^&*).</i>,
         icon: 'error',
       });
       return;
     }
+   
     
     const jsonData = {
       email: email,

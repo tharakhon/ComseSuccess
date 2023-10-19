@@ -69,7 +69,7 @@ function Resetpass() {
         return;
       }
           // ตรวจสอบว่ารหัสผ่านมีตัวอักษรพิมพ์ใหญ่และตัวอักษรพิมพ์เล็ก
-          if (!/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/[!@#$%^&*]/.test(password) || !/[0-9]/.test(password)) {
+          if (!/[a-z]/.test(newpassword) || !/[A-Z]/.test(newpassword) || !/[!@#$%^&*]/.test(newpassword) || !/[0-9]/.test(newpassword)) {
             MySwal.fire({
               html: <i>Password must contain lowercase letters, uppercase letters, and at least one special character (!@#$%^&*).</i>,
               icon: 'error',

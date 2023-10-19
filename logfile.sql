@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3307
--- Generation Time: Oct 19, 2023 at 11:23 AM
+-- Generation Time: Oct 19, 2023 at 11:53 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -110,7 +110,13 @@ INSERT INTO `logfile` (`id`, `email`, `status`, `time`) VALUES
 (69, 'kamolchanok.sin@ku.th', 'Changepassword', '2023-10-18 15:39:51'),
 (70, 'tharakhon.r@ku.th', 'Sign in', '2023-10-18 15:56:23'),
 (71, 'tharakhon.r@ku.th', 'Logout', '2023-10-18 15:56:30'),
-(72, 'tharakhon555@gmail.com', 'Register', '2023-10-19 09:19:49');
+(72, 'tharakhon555@gmail.com', 'Register', '2023-10-19 09:19:49'),
+(73, 'tharakhon5555@gmail.com', 'Register', '2023-10-19 09:46:31'),
+(74, 'tharakhon.r@ku.th', 'Resetpassword', '2023-10-19 09:49:25'),
+(75, 'tharakhon.r@ku.th', 'Sign in', '2023-10-19 09:50:28'),
+(76, 'tharakhon.r@ku.th', 'Changepassword', '2023-10-19 09:51:34'),
+(77, 'tharakhon.r@ku.th', 'Sign in', '2023-10-19 09:51:41'),
+(78, 'tharakhon.r@ku.th', 'Logout', '2023-10-19 09:51:43');
 
 --
 -- Indexes for dumped tables
@@ -130,7 +136,7 @@ ALTER TABLE `logfile`
 -- AUTO_INCREMENT for table `logfile`
 --
 ALTER TABLE `logfile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
